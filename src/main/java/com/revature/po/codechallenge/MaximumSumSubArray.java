@@ -1,11 +1,8 @@
 package com.revature.po.codechallenge;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
@@ -55,7 +52,6 @@ class SubArray implements Comparable<SubArray>{
 	/** 
 	 * This only works if the subarays are disjoint.
 	 * 
-	 * 
 	 * @param b
 	 * @return
 	 */
@@ -104,7 +100,7 @@ public class MaximumSumSubArray {
 	 * 
 	 * @return a list of all sub-arrays with the maximal sum.
 	 */
-	public List<int[]> getMaxSumSubArray() {
+	public int getMaxSumSubArray() {
 		
 		// Phase 1: From the given array, construct a set of sub-arrays
 		// consisting of only non-negative elements.
@@ -151,20 +147,17 @@ public class MaximumSumSubArray {
 		//    will just be that 1 member.
 		
 		if ( subs.size() <= 1 ) {
-			LinkedList<int[]> maxs = new LinkedList<>();
+			int max = -1;
 			
 			if ( subs.size() == 0 ) {
-				int max = Arrays.stream(arr).max().getAsInt();
-				int[] sub = new int[] {max};				
-				
-				maxs.add(sub);
+				max = Arrays.stream(arr).max().getAsInt();
 			}
 			else {
 				// There is only one. Get it and put it in maxs.
-				maxs.add( subs.stream().findFirst().get().toArray());
+				max = subs.stream().findFirst().get().getSum();
 			}
 			
-			return maxs;
+			return max;
 		}
 		
 		// If neither of the previous cases applied, now proceed to the conquer
@@ -218,16 +211,8 @@ public class MaximumSumSubArray {
 		}
 	
 
-		// All merging is complete and the maximal sum is known. Extract the
-		// sub-arrays with that sum into a list and return the list.
-		final int maxSum = curMaxSum;
-		
-		List<int[]> maxs = subs.stream()
-				               .filter( i->i.getSum()== maxSum )
-				               .map(i->i.toArray())
-				               .collect(Collectors.toList());
-		
-		return maxs;
+		// All merging is complete and the maximal sum is known. 
+		return curMaxSum;
 	}
 }
 

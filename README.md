@@ -1,4 +1,4 @@
-# POCodeChallenge090722
+# PO CodeChallenge for 09/07/22
 
 ## 1) Largest gap in an array:
 Given an unsorted array of length N, and we have to find the largest gap between
@@ -32,4 +32,13 @@ Output: 6
 Input: arr[] = {2, 2, -2} 
 Output: 4 
 ```
+
+## Solution
+
+There are 2 utility classes LargestArrayGap and MaximumSumSubArray. In both
+cases, you create an object by passing the array in question to the constructor
+and then calling the other method to compute the item in question.
+
+In LargestArrayGap the other method is named findLargestGap and in
+MaximumSumSubArray the other method is named getMaxSumSubArray.
 
